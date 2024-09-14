@@ -10,10 +10,20 @@ try:
     elif '/' in user_input:
         elements = user_input.split('/')
     else:
-        print("Неверный формат ввода.")
-        
-    elements = set(int(x.strip()) for x in elements)  # Remove whitespace and convert to integers
+        print("Неверный формат ввода.")     
+    
+    # Create a dictionary to count occurrences of each number
+    count_dict = {}
+    for num in elements:
+        num = num.strip()  # Remove any extra spaces
+        if num in count_dict:
+            count_dict[num] += 1
+        else:
+            count_dict[num] = 1
+    
+    # Filter out only unique elements (those that appear exactly once)
+    unique_elements = [num for num, count in count_dict.items() if count == 1]
        
-    print("Результат:", ", ".join(map(str, elements)))
+    print("Результат:", ", ".join(map(str, unique_elements)))
 except:
     print("Неверный формат ввода.")
